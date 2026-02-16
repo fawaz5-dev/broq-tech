@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bro-Q Tech</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f6f5df;
+            color: #1f3a5f;
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            background-color: #1f3a5f;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .hero .cta-btn {
+            background-color: #ff6b5a;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+		
+		.floating-logo {
+    		position: fixed;
+    		bottom: 20px;
+    		right: 20px;
+    		z-index: 1000;
+    		width: 56px;
+    		height: 56px;
+    		border-radius: 50%;
+    		background-color: white;
+    		background-image: url("logo.png"); /* Ensure logo.png is in the same folder */
+    		background-size: cover;
+    		background-position: center;
+   			background-repeat: no-repeat;
+    		box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    		cursor: pointer;
+    		display: flex;
+    		align-items: center;
+    		justify-content: center;
+    		transition: transform 0.2s ease;
+		}
+
+		.floating-logo:hover {
+    		transform: scale(1.06);
+		}
+		
+		.floating-text {
+    		position: absolute;
+    		right: 68px;
+    		background-color: #1f3a5f;
+    		color: white;
+    		padding: 8px 14px;
+    		border-radius: 20px;
+    		font-size: 13px;
+    		white-space: nowrap;
+    		opacity: 0;
+    		pointer-events: none;
+    		transform: translateY(2px);
+    		transition: opacity 0.2s ease, transform 0.2s ease;
+		}
+
+		.floating-logo:hover .floating-text {
+    		opacity: 1;
+    		transform: translateY(0);
+		}
+		
+		.floating-text.show {
+    		opacity: 1;
+    		transform: translateY(0);
+		}
+
+	    /* Particle system */
+		.particles {
+    		position: absolute;
+    		inset: 0;
+    		pointer-events: none;
+    		z-index: 1;
+		}
+
+		.particle {
+    		position: absolute;
+    		width: 6px;
+    		height: 6px;
+    		border-radius: 50%;
+    		filter: blur(1px);
+    		opacity: 0.6;
+    		animation: float 14s infinite ease-in-out,
+               		   glow 3s infinite alternate;
+		}
+
+		@keyframes float {
+    		0%   { transform: translateY(0); }
+    		50%  { transform: translateY(-40px); }
+    		100% { transform: translateY(0); }
+		}
+
+		.hero .particle {
+    		background: rgba(255, 255, 255, 0.7);
+    		box-shadow: 0 0 12px rgba(255,255,255,0.8);
+		}
+
+		.cta .cta-particle {
+    		background: rgba(255, 107, 90, 0.7);
+    		animation: float 18s infinite ease-in-out,
+               		   glow-cta 2.5s infinite alternate;
+		}
+
+		@keyframes glow-cta {
+    		from {
+        		box-shadow: 0 0 6px rgba(255,107,90,0.4);
+        		opacity: 0.4;
+    		}
+    		to {
+        		box-shadow: 0 0 16px rgba(255,107,90,1);
+        		opacity: 0.9;
+    		}
+		}
+
+		.hero > *:not(.particles),
+		.cta > *:not(.particles) {
+    		position: relative;
+    		z-index: 2;
+		}
+
+        /* ---------- SECTION ---------- */
+        .section {
+            padding: 70px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 50px;
+        }
+
+        /* ---------- SERVICES ---------- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            border: 2px solid #1f3a5f;
+        }
+
+        .service-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            color: #444;
+            line-height: 1.5;
+        }
+
+        /* ---------- BANNER ---------- */
+        .banner {
+            background-color: #ffffff;
+            border-top: 2px solid #1f3a5f;
+            border-bottom: 2px solid #1f3a5f;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .banner h2 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .banner p {
+            max-width: 700px;
+            margin: auto;
+            font-size: 17px;
+            color: #444;
+        }
+		
+        /* ---------- CTA ---------- */
+        .cta {
+            background-color: #1f3a5f;
+            color: white;
+            padding: 70px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta h2 {
+            font-size: 34px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            font-size: 17px;
+            margin-bottom: 30px;
+        }
+
+        .cta a {
+            background-color: #ff6b5a;
+            color: white;
+            padding: 14px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+		
+        /* ---------- FOOTER ---------- */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .footer a {
+            color: #1f3a5f;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="particles" id="hero-particles">
+        </div>
+	<h1>Bro-Q Tech</h1>
+    <p>
+        <br><br>
+        Websites. Chatbots. Deployments. 
+    </p>
+    <a href="mailto:contact.broqbot@gmail.com" class="cta-btn">Let’s Build Something</a>
+</section>
+
+<section class="section">
+    <h2 class="section-title">Services</h2>
+    <div class="services-grid">
+        <div class="service-card">
+            <h3>🌐 Website Design & Development</h3>
+            <p>We redesign outdated or messy websites into fast and modern mobile optimized experiences.</p>
+        </div>
+        <div class="service-card">
+            <h3>🤖Chatbots & Smart Features</h3>
+            <p>Interactive custom chatbots and smart tools that answer questions and function as a tour guide for your website.</p>
+        </div>
+        <div class="service-card">
+            <h3> ☁️ Deployment & Hosting</h3>
+            <p>We take your project live. Online, deployed and easy to update. Live hosting setup. Domain connection. Updates & redeploys.</p>
+        </div>
+        <div class="service-card">
+            <h3> 🧩 API & Tech Integrations</h3>
+            <p>Real-time data, automation, and third-party integrations that provide seamless operations.</p>
+        </div>
+    </div>
+</section>
+
+<section class="banner">
+    <h2>Not happy with your current website?</h2>
+    <p>We help small businesses upgrade their digital presence with modern websites, smart features, and clean deployments.</p>
+</section>
+
+<section class="section" style="background: #ffffff; border-radius: 30px; border: 1px solid #1f3a5f; margin-bottom: 70px; padding: 50px;">
+    <h2 style="font-size: 3rem; text-align: center; color: #1f3a5f; margin-bottom: 50px; font-family: Arial, sans-serif;">Client Brands & Partners</h2>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-bottom: 80px;">
+        <div style="flex: 1; min-width: 300px;">
+            <h4 style="color: #ff6b5a; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px;">Lawn & Pest Defense — California</h4>
+            <h2 style="font-size: 2.5rem; margin-top: 0; color: #1f3a5f;">Team Green</h2>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: #444;">
+                An elite, high-contrast digital website for <strong>Team Green</strong>. This platform features a luxury "topography" design language, highlighting their commitment to Fresno’s finest lawn care and pest defense.
+            </p>
+            <a href="https://team-green.onrender.com/" target="_blank" style="display: inline-block; background: #1f3a5f; color: white; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: bold;">Visit Site →</a>
+        </div>
+        <div style="flex: 1; min-width: 300px; height: 300px; border: 2px solid #eee; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <iframe src="https://team-green.onrender.com/" style="width: 100%; height: 100%; border: none;" title="Team Green Preview"></iframe>
+        </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-bottom: 80px; flex-direction: row-reverse;">
+        <div style="flex: 1; min-width: 300px;">
+            <h4 style="color: #ff6b5a; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px;">Wellness Technology</h4>
+            <h2 style="font-size: 2.5rem; margin-top: 0; color: #1f3a5f;">Fairy AI</h2>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: #444;">
+                A private, motion-activated wellness assistant developed for a luxury residence. <strong>Fairy AI</strong> uses computer vision and real-time socket communication to greet users, lead meditations, and track workouts without a single click.
+            </p>
+            <ul style="list-style: none; padding: 0; color: #1f3a5f; font-weight: 600; margin-bottom: 25px;">
+                <li style="margin-bottom: 8px;">✓ Real-time Computer Vision (Motion Detection)</li>
+                <li style="margin-bottom: 8px;">✓ Web Speech API Integration</li>
+                <li style="margin-bottom: 8px;">✓ Secure, Private Cloud Deployment</li>
+            </ul>
+            <a href="https://fairy-ai-tdoj.onrender.com/" target="_blank" style="display: inline-block; background: #1f3a5f; color: white; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: bold;">View Live Demo →</a>
+        </div>
+        <div style="flex: 1; min-width: 300px; height: 300px; border: 2px solid #eee; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <iframe src="https://fairy-ai-tdoj.onrender.com/" style="width: 100%; height: 100%; border: none;" title="Fairy AI Preview"></iframe>
+        </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-bottom: 80px;">
+        <div style="flex: 1; min-width: 300px;">
+            <h4 style="color: #ff6b5a; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px;">Automotive Care — India</h4>
+            <h2 style="font-size: 2.5rem; margin-top: 0; color: #1f3a5f;">Express Car Service</h2>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: #444;">
+                A premium digital presence for a prominent women-owned workshop in Bengaluru. We bridged the gap between "local mechanic" and "luxury showroom" using a high-impact, single-page interface featuring a deep-pink aesthetic.
+            </p>
+            <ul style="list-style: none; padding: 0; color: #1f3a5f; font-weight: 600; margin-bottom: 25px;">
+                <li style="margin-bottom: 8px;">✓ Custom Particle Engine (JavaScript Canvas)</li>
+                <li style="margin-bottom: 8px;">✓ Dynamic Review Carousel & Trust Banner</li>
+                <li style="margin-bottom: 8px;">✓ Specialized Map & UI Inversion</li>
+            </ul>
+            <a href="https://express-cars-hkhb.onrender.com/" target="_blank" style="display: inline-block; background: #1f3a5f; color: white; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: bold;">Visit Site →</a>
+        </div>
+        <div style="flex: 1; min-width: 300px; height: 300px; border: 2px solid #eee; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <iframe src="https://express-cars-hkhb.onrender.com/" style="width: 100%; height: 100%; border: none;" title="Express Car Preview"></iframe>
+        </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px;">
+        <div style="flex: 1; min-width: 300px;">
+            <h4 style="color: #ff6b5a; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px;">Drone Services — Georgia</h4>
+            <h2 style="font-size: 2.5rem; margin-top: 0; color: #1f3a5f;">ODI Engineering</h2>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: #444;">
+                Digital headquarters for an Atlanta-based drone firm. The site utilizes a palette of Service Station Red and Sun-Bleached Parchment, highlighting their 24/7 rapid-response security and surveillance operations.
+            </p>
+            <ul style="list-style: none; padding: 0; color: #1f3a5f; font-weight: 600; margin-bottom: 25px;">
+                <li style="margin-bottom: 8px;">✓ Vintage-Tech Visual Filter (CSS Sepia/Grain)</li>
+                <li style="margin-bottom: 8px;">✓ Integrated Real-World Dispatch Social Proof</li>
+                <li style="margin-bottom: 8px;">✓ Industrial Navigation & "Plus Code" Geolocation</li>
+            </ul>
+            <a href="https://odi-gtph.onrender.com/" target="_blank" style="display: inline-block; background: #1f3a5f; color: white; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: bold;">Visit Site →</a>
+        </div>
+        <div style="flex: 1; min-width: 300px; height: 300px; border: 2px solid #eee; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <iframe src="https://odi-gtph.onrender.com/" style="width: 100%; height: 100%; border: none;" title="ODI Engineering Preview"></iframe>
+        </div>
+    </div>
+</section>
+
+<a href="#" class="floating-logo" aria-label="Try out Bro-Q Bot">
+    <span class="floating-text">Try out Bro-Q Bot</span>
+</a>
+
+<section class="cta">
+    <div class="particles" id="cta-particles">
+        </div>
+    <h2> If your site looks outdated or doesn’t exist at all, we can help.</h2>
+    <p>
+        Have ideas that need a digital presence? Whether you’re starting fresh or improving what you already have,
+        we’ll help you move forward.
+    </p>
+    <a href="mailto:contact.broqbot@gmail.com">Get in Touch</a>
+</section>
+
+<div class="footer">
+    <div class="contact-links">
+        <a href="mailto:contact.broqbot@gmail.com" class="contact-btn primary">
+            Email: contact.broqbot@gmail.com
+        </a> | 
+        <a href="https://www.linkedin.com/company/bro-q-bot/" target="_blank" class="contact-btn">
+            Connect on LinkedIn
+        </a>
+    </div>
+</div>
+
+<script>
+    // 1. Particle Generation (Replaces Jinja2 range loop)
+    function generateParticles(targetId, count, multiplier1, multiplier2, extraClass = '') {
+        const container = document.getElementById(targetId);
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle ' + extraClass;
+            p.style.top = ((i * multiplier1) % 100) + '%';
+            p.style.left = ((i * multiplier2) % 100) + '%';
+            container.appendChild(p);
+        }
+    }
+
+    window.addEventListener("load", () => {
+        // Hero particles: range(50), 37% top, 61% left
+        generateParticles('hero-particles', 50, 37, 61);
+        
+        // CTA particles: range(30), 53% top, 89% left, class 'cta-particle'
+        generateParticles('cta-particles', 30, 53, 89, 'cta-particle');
+
+        // 2. Floating text animation
+        const text = document.querySelector(".floating-text");
+        if (text) {
+            setTimeout(() => {
+                text.classList.add("show");
+                setTimeout(() => {
+                    text.classList.remove("show");
+                }, 4000);
+            }, 5000);
+        }
+    });
+</script>
+
+</body>
+</html>
