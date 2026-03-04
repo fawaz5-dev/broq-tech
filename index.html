@@ -12,6 +12,108 @@
             background-color: #f6f5df;
             color: #1f3a5f;
         }
+		
+		.map-section {
+		        text-align: center;
+		        padding: 80px 20px;
+		        background: #ffffff;
+		        border-top: 2px solid #1f3a5f;
+		    }
+		
+		    .map-container {
+		        position: relative;
+		        max-width: 1000px;
+		        margin: 0 auto;
+		        background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg');
+		        background-size: contain;
+		        background-repeat: no-repeat;
+		        background-position: center;
+		        aspect-ratio: 2 / 1;
+		    }
+		
+		    .location-ping {
+		        position: absolute;
+		        width: 14px;
+		        height: 14px;
+		        background-color: #ff6b5a;
+		        border-radius: 50%;
+		        transform: translate(-50%, -50%);
+		        cursor: pointer;
+		        z-index: 10;
+		    }
+		
+		    /* Hover Tooltip */
+		    .location-ping::before {
+		        content: attr(data-name);
+		        position: absolute;
+		        bottom: 25px;
+		        left: 50%;
+		        transform: translateX(-50%);
+		        background: rgba(31, 58, 95, 0.9);
+		        color: white;
+		        padding: 5px 12px;
+		        border-radius: 4px;
+		        font-size: 11px;
+		        white-space: nowrap;
+		        opacity: 0;
+		        transition: opacity 0.2s ease;
+		        pointer-events: none;
+		    }
+		
+		    .location-ping:hover::before {
+		        opacity: 1;
+		    }
+		
+		    .location-ping::after {
+		        content: '';
+		        position: absolute;
+		        width: 300%;
+		        height: 300%;
+		        top: -100%;
+		        left: -100%;
+		        border-radius: 50%;
+		        border: 2px solid #ff6b5a;
+		        animation: ping-pulse 2s infinite;
+		    }
+		
+		    /* CALIBRATED COORDINATES based on your directions */
+		    .pin-fresno   { top: 27.5%; left: 18.2%; } /* North-East nudge */
+		    .pin-georgia  { top: 32.5%; left: 25.5%; } /* North-East shift */
+		    .pin-abudhabi { top: 34.5%; left: 59.8%; } /* North-West shift */
+		    .pin-bangalore { top: 40%; left: 66.2%; } /* North-West shift */
+		
+		    .client-card {
+		        position: absolute;
+		        bottom: 5%;
+		        left: 50%;
+		        transform: translateX(-50%) translateY(20px);
+		        background: #1f3a5f;
+		        color: white;
+		        padding: 20px;
+		        border-radius: 15px;
+		        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+		        width: 300px;
+		        opacity: 0;
+		        pointer-events: none;
+		        transition: all 0.3s ease;
+		        z-index: 20;
+		    }
+		
+		    .client-card.active {
+		        opacity: 1;
+		        transform: translateX(-50%) translateY(0);
+		        pointer-events: auto;
+		    }
+		
+		    .client-card h4 { margin: 0; color: #ff6b5a; font-size: 0.8rem; text-transform: uppercase; }
+		    .client-card h3 { margin: 5px 0; font-size: 1.4rem; }
+		    .client-card p { margin: 0 0 15px; font-size: 0.9rem; opacity: 0.9; line-height: 1.4; }
+		    .client-card a { color: #ff6b5a; font-weight: bold; text-decoration: none; border: 1px solid #ff6b5a; padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; }
+		
+		    @keyframes ping-pulse {
+		        0% { transform: scale(0.1); opacity: 1; }
+		        100% { transform: scale(1.5); opacity: 0; }
+		    }
 
         /* ---------- HERO ---------- */
         .hero {
@@ -285,6 +387,25 @@
     </div>
 </section>
 
+
+<section class="map-section">
+    <h2 class="section-title">Our Global Reach</h2>
+    <div class="map-container">
+        <div class="location-ping pin-fresno" data-name="Team Green" onclick="showClient('fresno')"></div>
+        <div class="location-ping pin-georgia" data-name="ODI Engineering" onclick="showClient('georgia')"></div>
+        <div class="location-ping pin-abudhabi" data-name="Wrapido" onclick="showClient('uae')"></div>
+        <div class="location-ping pin-bangalore" data-name="Express Car Service" onclick="showClient('india')"></div>
+
+        <div id="client-card" class="client-card">
+            <h4 id="card-location">LOCATION</h4>
+            <h3 id="card-name">Project Name</h3>
+            <p id="card-text">Description of work.</p>
+            <a id="card-url" href="#" target="_blank">View Site →</a>
+        </div>
+    </div>
+</section>
+
+
 <section class="banner">
     <h2>Not happy with your current website?</h2>
     <p>We help small businesses upgrade their digital presence with modern websites, smart features, and clean deployments.</p>
@@ -363,6 +484,25 @@
             <iframe src="https://odi-gtph.onrender.com/" style="width: 100%; height: 100%; border: none;" title="ODI Engineering Preview"></iframe>
         </div>
     </div>
+	
+	<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-top: 80px; flex-direction: row-reverse;">
+      <div style="flex: 1; min-width: 300px;">
+            <h4 style="color: #ff6b5a; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px;">Car Modification — Dubai, UAE</h4>
+            <h2 style="font-size: 2.5rem; margin-top: 0; color: #1f3a5f;">Wrapido</h2>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: #444;">
+                A premium digital presence for an elite car modification workshop in Dubai. <strong>Wrapido</strong> blends high-end aesthetics with bold visual identity, positioning the brand firmly in the luxury automotive customization market.
+            </p>
+            <ul style="list-style: none; padding: 0; color: #1f3a5f; font-weight: 600; margin-bottom: 25px;">
+                <li style="margin-bottom: 8px;">✓ Luxury Automotive Visual Identity</li>
+                <li style="margin-bottom: 8px;">✓ High-Impact Single-Page Interface</li>
+                <li style="margin-bottom: 8px;">✓ Premium Service Showcase & Booking Flow</li>
+            </ul>
+            <a href="https://wrapidoo.onrender.com/" target="_blank" style="display: inline-block; background: #1f3a5f; color: white; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: bold;">Visit Site →</a>
+        </div>
+        <div style="flex: 1; min-width: 300px; height: 300px; border: 2px solid #eee; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <iframe src="https://wrapidoo.onrender.com/" style="width: 100%; height: 100%; border: none;" title="Wrapido Preview"></iframe>
+        </div>
+    </div>
 </section>
 
 <a href="#" class="floating-logo" aria-label="Try out Bro-Q Bot">
@@ -422,6 +562,54 @@
             }, 5000);
         }
     });
+	
+	const projects = {
+	        fresno: {
+	            loc: "Fresno, California",
+	            name: "Team Green",
+	            text: "High-contrast digital presence and luxury topography design for elite lawn defense.",
+	            url: "https://team-green.onrender.com/"
+	        },
+	        georgia: {
+	            loc: "Atlanta, Georgia",
+	            name: "ODI Engineering",
+	            text: "Industrial headquarters with vintage-tech visual filters and rapid dispatch proof.",
+	            url: "https://odi-gtph.onrender.com/"
+	        },
+	        uae: {
+	            loc: "Dubai, UAE",
+	            name: "Wrapido",
+	            text: "Premium digital interface for an elite, high-end car modification garage.",
+	            url: "https://wrapidoo.onrender.com/"
+	        },
+	        india: {
+	            loc: "Bengaluru, India",
+	            name: "Express Car Service",
+	            text: "Luxury workshop interface featuring custom particle engines and UI inversion.",
+	            url: "https://express-cars-hkhb.onrender.com/"
+	        }
+	    };
+	
+	    function showClient(id) {
+	        const card = document.getElementById('client-card');
+	        const data = projects[id];
+	
+	        document.getElementById('card-location').innerText = data.loc;
+	        document.getElementById('card-name').innerText = data.name;
+	        document.getElementById('card-text').innerText = data.text;
+	        document.getElementById('card-url').href = data.url;
+	
+	        card.classList.add('active');
+	
+	        setTimeout(() => {
+	            window.addEventListener('click', function close(e) {
+	                if (!e.target.closest('.location-ping') && !e.target.closest('.client-card')) {
+	                    card.classList.remove('active');
+	                    window.removeEventListener('click', close);
+	                }
+	            });
+	        }, 10);
+	    }
 </script>
 
 </body>
